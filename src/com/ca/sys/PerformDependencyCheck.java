@@ -30,9 +30,11 @@ public class PerformDependencyCheck {
 	}
 	
 	public void checkListValue(){
+		System.out.println("----KEY Value Pair -----");
 		depenencyKeyValue.printAllValues();
-		System.out.println("---------");
+		System.out.println("----VALUE Value Pair -----");
 		depenencyValueKey.printAllValues();
+		System.out.println("---- END -----");
 	}
 	
 }

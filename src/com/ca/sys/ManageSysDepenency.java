@@ -32,10 +32,10 @@ public class ManageSysDepenency {
 	            } else if (args1[0].equalsIgnoreCase("DEPEND")) {
 	                // Put stuff here
 	            	
-	            	key = args1[0];
+	            	key = args1[1];
 	            	System.out.println("SomeInput"+ key);
 	            	
-	            	String[] dependencies = Arrays.copyOfRange(args1,1, args1.length);
+	            	String[] dependencies = Arrays.copyOfRange(args1,2, args1.length);
 	            	List<String> value = Arrays.asList(dependencies);
 	            	//value.remove(0);
 	            	System.out.println(" value" + value);
