@@ -11,14 +11,28 @@ public class PerformDependencyCheck {
 	private KeyValueStructure depenencyValueKey;
 	
 	
-	//public 
+	public PerformDependencyCheck(){
+		depenencyKeyValue = new KeyValueStructure();
+		depenencyValueKey = new KeyValueStructure();
+	}
 	
 	public void addKeyValueList(String key, List<String> value){
 		depenencyKeyValue.add(key, value);
 	}
 	
-	public void addValueListKeyList(String key, List<String> value){
-		depenencyKeyValue.add(key, value);
+	public void addValueListKeyList(List<String>  key, String value){
+		
+		for (String oneKey: key) {
+		    System.out.println(oneKey);
+		    depenencyValueKey.addKeyValue(oneKey, value);
+		}
+		
+	}
+	
+	public void checkListValue(){
+		depenencyKeyValue.printAllValues();
+		System.out.println("---------");
+		depenencyValueKey.printAllValues();
 	}
 	
 }

@@ -34,6 +34,29 @@ public class KeyValueStructure {
 	    //values.add(value);
 	    
 	}
+
+	public void addKeyValue( String key, String value) {
+		//map.putIfAbsent(key,value);
+		//map.putIfAbsent("raj",Arrays.asList("one", "two", "three"));
+		
+		List<String> values = map.get(key);
+	    if (values != null) {
+
+	    	Set<String> temp = new TreeSet<>();  
+	    	temp.addAll(values);
+	    	temp.addAll(Arrays.asList(value));
+
+	        List<String> combinedList = new ArrayList<>(temp);
+	        
+	    	map.put(key, combinedList);
+	    	System.out.println(values);
+	    } else {
+	    	//System.out.println(values);
+	    	map.put(key, Arrays.asList(value));
+	    }
+	    //values.add(value);
+	    
+	}
 	
 	//addValueListKeyList
 	
@@ -47,6 +70,11 @@ public class KeyValueStructure {
 	public void print(String key){
 		System.out.println(map.get(key));
 	}
+	
+	public void printAllValues(){
+		//System.out.println(map.get(key));
+		map.forEach((k,v)-> System.out.println(k+", "+v));
+	}	
 	
 	//mapOfList.put();
 	

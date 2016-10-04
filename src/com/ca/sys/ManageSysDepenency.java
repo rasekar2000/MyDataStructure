@@ -31,18 +31,21 @@ public class ManageSysDepenency {
 	                System.exit(0);
 	            } else if (args1[0].equalsIgnoreCase("DEPEND")) {
 	                // Put stuff here
-	            	System.out.println("SomeInput"+ key);
+	            	
 	            	key = args1[0];
+	            	System.out.println("SomeInput"+ key);
+	            	
 	            	String[] dependencies = Arrays.copyOfRange(args1,1, args1.length);
 	            	List<String> value = Arrays.asList(dependencies);
 	            	//value.remove(0);
 	            	System.out.println(" value" + value);
 	            	performDependencyCheck.addKeyValueList(key,value);
-	            	//performDependencyCheck.addValueListKeyList(value, key);
+	            	performDependencyCheck.addValueListKeyList(value, key);
 	            } else {
 	                System.out.println(args1[0]);
 	                //System.exit(0);
 	            }
+	            performDependencyCheck.checkListValue();
 	        }
 	    }
 	}
