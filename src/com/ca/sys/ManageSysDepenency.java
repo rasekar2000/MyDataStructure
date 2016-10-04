@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 public class ManageSysDepenency {
 
-
+	private static enum SysDependencyInput {
+	    depend, install, remove, list, q;
+	}
 	
 	public static void processInput(PerformDependencyCheck performDependencyCheck){
 
@@ -27,31 +29,41 @@ public class ManageSysDepenency {
 
 	        // process arguments
 	        if (args1.length > 0) {
-	            if (args1[0].equalsIgnoreCase("q")) {
-	                System.exit(0);
-	            } else if (args1[0].equalsIgnoreCase("DEPEND")) {
-	                // Put stuff here
-	            	
-	            	key = args1[1];
-	            	System.out.println("SomeInput"+ key);
-	            	
-	            	String[] dependencies = Arrays.copyOfRange(args1,2, args1.length);
-	            	List<String> value = Arrays.asList(dependencies);
-	            	//value.remove(0);
-	            	System.out.println(" value" + value);
-	            	performDependencyCheck.addKeyValueList(key,value);
-	            	performDependencyCheck.addValueListKeyList(value, key);
-	            } else {
-	                System.out.println(args1[0]);
-	                //System.exit(0);
-	            }
+	        	
+	        	key = args1[0];
+	        	
+
+	        	//String value; // assume input
+	        	SysDependencyInput sysDependencyInput = SysDependencyInput.valueOf(key.toLowerCase()); // surround with try/catch
+
+	        	switch(sysDependencyInput) {
+	        	    case depend:
+	        	    	performDependencyCheck.depend(args1);
+	        	        break;
+	        	    case install:
+	        	    	performDependencyCheck.install(args1);
+	        	        break;
+	        	    case remove:
+	        	    	performDependencyCheck.remove(args1);
+	        	        break;
+	        	    case list:
+	        	    	performDependencyCheck.list(args1);
+	        	        break;	
+	        	    case q:
+	        	    	//performDependencyCheck.list(args1);
+	        	    	System.exit(0);
+	        	        break;		        	        
+	        	    default:{
+	        	    	System.out.println("default");
+	        	    	break;
+	        	    }
+	        	}
+
 	            performDependencyCheck.checkListValue();
 	        }
 	    }
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Hello World");
 		
 		PerformDependencyCheck performDependencyCheck = new PerformDependencyCheck();
 		processInput(performDependencyCheck);

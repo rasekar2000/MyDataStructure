@@ -1,5 +1,6 @@
 package com.ca.sys;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.ca.sys.datastructure.KeyValueStructure;
@@ -23,11 +24,33 @@ public class PerformDependencyCheck {
 	public void addValueListKeyList(List<String>  key, String value){
 		
 		for (String oneKey: key) {
-		    System.out.println(oneKey);
+		    //System.out.println(oneKey);
 		    depenencyValueKey.addKeyValue(oneKey, value);
 		}
 		
 	}
+	
+	public void depend(String[] keyValue){
+    	String key = keyValue[1];
+    	//System.out.println("SomeInput"+ key);
+    	
+    	String[] dependencies = Arrays.copyOfRange(keyValue,2, keyValue.length);
+    	List<String> value = Arrays.asList(dependencies);
+    	//value.remove(0);
+    	//System.out.println(" value" + value);
+    	this.addKeyValueList(key,value);
+    	this.addValueListKeyList(value, key);
+		return;
+	}
+	public void install(String[] keyValue){
+		return;
+	}
+	public void remove(String[] keyValue){
+		return;
+	}
+	public void list(String[] keyValue){
+		return;
+	}	
 	
 	public void checkListValue(){
 		System.out.println("----KEY Value Pair -----");
