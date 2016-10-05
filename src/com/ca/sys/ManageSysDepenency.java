@@ -38,7 +38,8 @@ public class ManageSysDepenency {
 
 	        	switch(sysDependencyInput) {
 	        	    case depend:
-	        	    	performDependencyCheck.depend(args1);
+	        	    	//System.out.println(line);
+	        	    	performDependencyCheck.depend(line,args1);
 	        	    	performDependencyCheck.checkListValue();
 	        	        break;
 	        	    case install:

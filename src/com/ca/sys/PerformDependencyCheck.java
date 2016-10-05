@@ -9,82 +9,106 @@ import com.ca.sys.datastructure.KeyValueStructure;
 public class PerformDependencyCheck {
 
 	private KeyValueStructure depenencyKeyValue;
-	
+
 	private KeyValueStructure depenencyValueKey;
-	
+
 	private ArrayList<String> installedComponents;
-	
-	public PerformDependencyCheck(){
+
+	public PerformDependencyCheck() {
 		depenencyKeyValue = new KeyValueStructure();
 		depenencyValueKey = new KeyValueStructure();
-		installedComponents = new  ArrayList<String>();
+		installedComponents = new ArrayList<String>();
 	}
-	
-	public void addKeyValueList(String key, List<String> value){
+
+	public void addKeyValueList(String key, List<String> value) {
 		depenencyKeyValue.add(key, value);
 	}
-	
-	public void addValueListKeyList(List<String>  key, String value){
-		
-		for (String oneKey: key) {
-		    //System.out.println(oneKey);
-		    depenencyValueKey.addKeyValue(oneKey, value);
+
+	public void addValueListKeyList(List<String> key, String value) {
+
+		for (String oneKey : key) {
+			// System.out.println(oneKey);
+			depenencyValueKey.addKeyValue(oneKey, value);
 		}
-		
-	}
-	
-	public void depend(String[] keyValue){
-    	String key = keyValue[1];
-    	//System.out.println("SomeInput"+ key);
-    	
-    	String[] dependencies = Arrays.copyOfRange(keyValue,2, keyValue.length);
-    	List<String> value = Arrays.asList(dependencies);
 
-    	this.addKeyValueList(key,value);
-    	this.addValueListKeyList(value, key);
-
-    	return;
 	}
-	
-	public void install(String[] keyValue){
-		// If this key wasn't part of the depenencyKeyValue then add it to the installedComponents
+
+	public void depend(String inputLine, String[] keyValue) {
 		String key = keyValue[1];
-		//System.out.println("key "+ key);
-		
+		System.out.println(inputLine);
+
+		String[] dependencies = Arrays
+				.copyOfRange(keyValue, 2, keyValue.length);
+		List<String> value = Arrays.asList(dependencies);
+
+		this.addKeyValueList(key, value);
+		this.addValueListKeyList(value, key);
+
+		return;
+	}
+
+	public void install(String[] keyValue) {
+		// If this key wasn't part of the depenencyKeyValue then add it to the
+		// installedComponents
+		String key = keyValue[1];
+		boolean aIsExistByIndex = false;
+		int listValuesSize = 0;
+		// System.out.println("key "+ key);
+
 		List<String> listValues = depenencyKeyValue.getValueList(key);
-		if ( listValues != null) {
-			//System.out.println("Installing "+listValues);
-			for (String installingComponent: listValues) {
-			    System.out.println("\t"+"Installing "+installingComponent);
-			    installedComponents.add(installingComponent);
-			    //depenencyValueKey.addKeyValue(oneKey, value);
+		if (listValues != null) {
+			// System.out.println("Installing "+listValues);
+			listValuesSize = listValues.size();
+			for (String installingComponent : listValues) {
+
+				aIsExistByIndex = installedComponents
+						.contains(installingComponent);
+				if (aIsExistByIndex) {
+					if (listValuesSize == 1) {
+						System.out.println("\t" + installingComponent
+								+ " is already installed.");
+					}
+				} else {
+					System.out.println("\t" + "Installing "
+							+ installingComponent);
+					installedComponents.add(installingComponent);
+				}
+				// depenencyValueKey.addKeyValue(oneKey, value);
 			}
+		}// else {
+		aIsExistByIndex = installedComponents.contains(key);
+		if (aIsExistByIndex) {
+			System.out.println("\t" + key + " is already installed.");
 		} else {
-			System.out.println("\t"+"Installing "+key);
+			System.out.println("\t" + "Installing " + key);
 			installedComponents.add(key);
-			//System.out.println("key "+ key + " null list");
-			//System.out.println(installedComponents.get(0));
 		}
+		// System.out.println("key "+ key + " null list");
+		// System.out.println(installedComponents.get(0));
+		// }
 		return;
 	}
-	public void remove(String[] keyValue){
+
+	public void remove(String[] keyValue) {
 		return;
 	}
-	public void list(){
-		//System.out.println("installedComponents" +installedComponents.size()); 
-		for (String installedComponent: installedComponents) {
-		    System.out.println("\t"+installedComponent);
-		    //depenencyValueKey.addKeyValue(oneKey, value);
+
+	public void list() {
+		// System.out.println("installedComponents"
+		// +installedComponents.size());
+		for (String installedComponent : installedComponents) {
+			System.out.println("\t" + installedComponent);
+			// depenencyValueKey.addKeyValue(oneKey, value);
 		}
-		//return;
-	}	
-	
-	public void checkListValue(){
+		// return;
+	}
+
+	public void checkListValue() {
 		System.out.println("----KEY Value Pair -----");
 		depenencyKeyValue.printAllValues();
 		System.out.println("----VALUE Value Pair -----");
 		depenencyValueKey.printAllValues();
 		System.out.println("---- END -----");
 	}
-	
+
 }
