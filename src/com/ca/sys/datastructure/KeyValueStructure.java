@@ -49,7 +49,8 @@ public class KeyValueStructure {
 	        List<String> combinedList = new ArrayList<>(temp);
 	        
 	    	map.put(key, combinedList);
-	    	System.out.println(values);
+	    	//System.out.println(values);
+	    	
 	    } else {
 	    	//System.out.println(values);
 	    	map.put(key, Arrays.asList(value));
@@ -58,6 +59,9 @@ public class KeyValueStructure {
 	    
 	}
 	
+	public List<String> getValueList(String key) {
+		return  map.get(key);
+	}
 	//addValueListKeyList
 	
 	public boolean isExists(String input){

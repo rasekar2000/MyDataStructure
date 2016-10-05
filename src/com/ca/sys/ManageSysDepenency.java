@@ -39,6 +39,7 @@ public class ManageSysDepenency {
 	        	switch(sysDependencyInput) {
 	        	    case depend:
 	        	    	performDependencyCheck.depend(args1);
+	        	    	performDependencyCheck.checkListValue();
 	        	        break;
 	        	    case install:
 	        	    	performDependencyCheck.install(args1);
@@ -47,7 +48,7 @@ public class ManageSysDepenency {
 	        	    	performDependencyCheck.remove(args1);
 	        	        break;
 	        	    case list:
-	        	    	performDependencyCheck.list(args1);
+	        	    	performDependencyCheck.list();
 	        	        break;	
 	        	    case q:
 	        	    	//performDependencyCheck.list(args1);
@@ -59,7 +60,8 @@ public class ManageSysDepenency {
 	        	    }
 	        	}
 
-	            performDependencyCheck.checkListValue();
+	            
+	            //sperformDependencyCheck.install(args1);
 	        }
 	    }
 	}

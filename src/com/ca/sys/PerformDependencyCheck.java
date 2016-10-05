@@ -1,5 +1,6 @@
 package com.ca.sys;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,10 +12,12 @@ public class PerformDependencyCheck {
 	
 	private KeyValueStructure depenencyValueKey;
 	
+	private ArrayList<String> installedComponents;
 	
 	public PerformDependencyCheck(){
 		depenencyKeyValue = new KeyValueStructure();
 		depenencyValueKey = new KeyValueStructure();
+		installedComponents = new  ArrayList<String>();
 	}
 	
 	public void addKeyValueList(String key, List<String> value){
@@ -36,20 +39,44 @@ public class PerformDependencyCheck {
     	
     	String[] dependencies = Arrays.copyOfRange(keyValue,2, keyValue.length);
     	List<String> value = Arrays.asList(dependencies);
-    	//value.remove(0);
-    	//System.out.println(" value" + value);
+
     	this.addKeyValueList(key,value);
     	this.addValueListKeyList(value, key);
-		return;
+
+    	return;
 	}
+	
 	public void install(String[] keyValue){
+		// If this key wasn't part of the depenencyKeyValue then add it to the installedComponents
+		String key = keyValue[1];
+		//System.out.println("key "+ key);
+		
+		List<String> listValues = depenencyKeyValue.getValueList(key);
+		if ( listValues != null) {
+			//System.out.println("Installing "+listValues);
+			for (String installingComponent: listValues) {
+			    System.out.println("\t"+"Installing "+installingComponent);
+			    installedComponents.add(installingComponent);
+			    //depenencyValueKey.addKeyValue(oneKey, value);
+			}
+		} else {
+			System.out.println("\t"+"Installing "+key);
+			installedComponents.add(key);
+			//System.out.println("key "+ key + " null list");
+			//System.out.println(installedComponents.get(0));
+		}
 		return;
 	}
 	public void remove(String[] keyValue){
 		return;
 	}
-	public void list(String[] keyValue){
-		return;
+	public void list(){
+		//System.out.println("installedComponents" +installedComponents.size()); 
+		for (String installedComponent: installedComponents) {
+		    System.out.println("\t"+installedComponent);
+		    //depenencyValueKey.addKeyValue(oneKey, value);
+		}
+		//return;
 	}	
 	
 	public void checkListValue(){
