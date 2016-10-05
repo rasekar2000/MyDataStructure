@@ -90,7 +90,81 @@ public class PerformDependencyCheck {
 	}
 
 	public void remove(String[] keyValue) {
-		return;
+		String key = keyValue[1];
+		boolean aIsExistByIndex = false;
+		boolean isItemNotRemoveable = false;
+		int listValuesSize = 0;
+		// System.out.println("key "+ key);
+
+		/*
+		 List<String> listValues = depenencyKeyValue.getValueList(key);
+		 
+		if (listValues != null) {
+			// System.out.println("Installing "+listValues);
+			listValuesSize = listValues.size();
+			for (String installingComponent : listValues) {
+
+				aIsExistByIndex = installedComponents
+						.contains(installingComponent);
+				if (aIsExistByIndex) {
+					if (listValuesSize == 1) {
+						System.out.println("\t" + installingComponent
+								+ " is already installed.");
+					}
+				} else {
+					System.out.println("\t" + "Installing "
+							+ installingComponent);
+					installedComponents.add(installingComponent);
+				}
+				// depenencyValueKey.addKeyValue(oneKey, value);
+			}
+		}// else {
+		*/
+		
+		 List<String> listValues = depenencyValueKey.getValueList(key);
+		 
+		if (listValues != null) {
+			// System.out.println("Installing "+listValues);
+			listValuesSize = listValues.size();
+			for (String dependencyComponent : listValues) {
+
+				isItemNotRemoveable = installedComponents
+						.contains(dependencyComponent);
+				if (isItemNotRemoveable) { 
+					break;
+				}
+				/*
+				if (aIsExistByIndex) {
+					if (listValuesSize == 1) {
+						System.out.println("\t" + dependencyComponent
+								+ " is still needed.");
+					}
+				} else {
+					System.out.println("\t" + "Removing "
+							+ dependencyComponent);
+					installedComponents.remove(dependencyComponent);
+				}
+				*/
+				// depenencyValueKey.addKeyValue(oneKey, value);
+			}
+			if (isItemNotRemoveable) {
+				System.out.println("\t" + key
+						+ " is still needed.");
+			} else {
+				System.out.println("\t" + "Removing "
+						+ key);
+				installedComponents.remove(key);				
+			}
+			
+		} else {
+			aIsExistByIndex = installedComponents.contains(key);
+			if (aIsExistByIndex) {
+				System.out.println("\t" + "Removing " + key);
+				installedComponents.remove(key);			
+			} else {
+				System.out.println("\t" + key + " is not installed.");
+			}
+		}
 	}
 
 	public void list() {
